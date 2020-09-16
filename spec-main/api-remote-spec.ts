@@ -498,11 +498,11 @@ ifdescribe(features.isRemoteModuleEnabled())('remote module', () => {
 
     it('should search module from the user app', async () => {
       expectPathsEqual(
-        path.normalize(await remotely(() => require('electron').remote.process.mainModule!.filename)),
+        path.normalize(await remotely(() => require('electron').remote.(process as any).mainModule.filename)),
         path.resolve(__dirname, 'index.js')
       );
       expectPathsEqual(
-        path.normalize(await remotely(() => require('electron').remote.process.mainModule!.paths[0])),
+        path.normalize(await remotely(() => require('electron').remote.(process as any).mainModule.paths[0])),
         path.resolve(__dirname, 'node_modules')
       );
     });
